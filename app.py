@@ -62,7 +62,7 @@
 #
 
 # PART 2
-from flask import Flask
+from flask import Flask, render_template
 from helpers import get_pokemon_by_name, get_random_pokemon_list
 
 
@@ -71,7 +71,8 @@ app = Flask(__name__)
 
 @app.get("/")
 def pokemon_list():
-    return ', '.join([pokemon['name'] for pokemon in get_random_pokemon_list()]).title()
+    random_pokemon = get_random_pokemon_list()
+    return render_template("pokemon_list.html", random_pokemon=random_pokemon)
 
 
 @app.get("/<pokemon_name>")
